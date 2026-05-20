@@ -180,6 +180,10 @@ Respuesta:
 }
 ```
 
+## Despliegue gratis
+
+Si Render no te permite desplegar gratis, usa la alternativa Vercel + Koyeb documentada en [docs/free-deployment.md](docs/free-deployment.md).
+
 ## Documentacion tecnica
 
 La documentacion completa esta en [docs/technical-documentation.md](docs/technical-documentation.md).
