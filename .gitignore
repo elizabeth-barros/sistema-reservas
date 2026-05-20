@@ -1,0 +1,10 @@
+node_modules
+dist
+.next
+.env
+.env.local
+*.sqlite
+coverage
+npm-debug.log*
+yarn-error.log*
+pnpm-lock.yaml

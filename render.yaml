@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: hotel-reservations-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_TYPE
+        value: postgres
+      - key: DATABASE_SSL
+        value: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hotel-reservations-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://TU-PROYECTO.vercel.app
+
+databases:
+  - name: hotel-reservations-db
+    databaseName: hotel_reservations
+    user: hotel_reservations_user
