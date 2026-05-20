@@ -12,15 +12,26 @@ async function bootstrap() {
     .filter(Boolean)
     .map((origin) => origin!.trim().replace(/\/$/, ''));
 
+  const isAllowedOrigin = (origin?: string) => {
+    if (!origin) {
+      return true;
+    }
+
+    const normalizedOrigin = origin.replace(/\/$/, '');
+
+    return (
+      /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(normalizedOrigin) ||
+      normalizedOrigin.endsWith('.vercel.app') ||
+      normalizedOrigin.endsWith('.onrender.com') ||
+      normalizedOrigin.endsWith('.koyeb.app') ||
+      configuredOrigins.includes(normalizedOrigin)
+    );
+  };
+
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: (origin, callback) => {
-      const normalizedOrigin = origin?.replace(/\/$/, '');
-      const isLocal = !origin || /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
-      const isVercelPreview = Boolean(normalizedOrigin?.endsWith('.vercel.app'));
-      const isConfigured = Boolean(normalizedOrigin && configuredOrigins.includes(normalizedOrigin));
-
-      if (isLocal || isVercelPreview || isConfigured) {
+      if (isAllowedOrigin(origin)) {
         callback(null, true);
         return;
       }
@@ -29,6 +40,8 @@ async function bootstrap() {
     },
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Length'],
+    optionsSuccessStatus: 204,
     credentials: true,
   });
   app.useGlobalPipes(
