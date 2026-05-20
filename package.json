@@ -6,6 +6,8 @@
   "scripts": {
     "dev:backend": "npm run start:dev --workspace backend",
     "dev:frontend": "npm run dev --workspace frontend",
+    "render:build": "npm install && npm run build --workspace backend",
+    "render:start": "npm run start:prod --workspace backend",
     "build": "npm run build --workspaces",
     "lint": "npm run lint --workspaces"
   },

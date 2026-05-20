@@ -184,6 +184,8 @@ Respuesta:
 
 Si Render no te permite desplegar gratis, usa la alternativa Vercel + Koyeb documentada en [docs/free-deployment.md](docs/free-deployment.md).
 
+Si Render falla al iniciar el backend, revisa [docs/render-troubleshooting.md](docs/render-troubleshooting.md).
+
 ## Documentacion tecnica
 
 La documentacion completa esta en [docs/technical-documentation.md](docs/technical-documentation.md).
